@@ -1,0 +1,19 @@
+name: Validate
+on: 
+  pull_request:
+    branches:
+      - US-001
+
+    paths: 
+      - 'force-app/**'
+jobs:
+ validate:
+  runs-on: ubuntu-latest
+  steps:
+  - uses: actions/checkout@v3
+  - name: Validate
+    uses: jawills/sf-deploy@v1.0
+    with
+    SFDX_AUTH_URL: ${{secrets.
+    SFDX_AUTH_URL}}
+    DRY_RUN: true
