@@ -3,7 +3,6 @@ on:
   pull_request:
     branches:
       - develop
-
     paths: 
       - 'force-app/**'
 jobs:
@@ -12,7 +11,7 @@ jobs:
   steps:
    - uses: actions/checkout@v3
    - name: Validate
-     uses: sneha/sf-deploy@v1.0
+     uses: jawills/sf-deploy@v1.0
      with:
       SFDX_AUTH_URL: ${{secrets.SFDX_AUTH_URL}}
       DRY_RUN: false
