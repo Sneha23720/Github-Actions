@@ -1,0 +1,35 @@
+name: Salesforce Deployment
+
+on:
+  push:
+    branches:
+      - US-001  # Change to your deployment branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'  # Use the version required for Salesforce CLI
+      
+      - name: Install Salesforce CLI
+        run: npm install -g sfdx-cli
+
+      - name: Authenticate with Salesforce
+        env:
+          SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL }}
+        run: |
+          echo "$SFDX_AUTH_URL" > auth-url.txt
+          sfdx auth:sfdxurl:store -d -a my-org -f auth-url.txt
+          rm auth-url.txt
+
+      - name: Deploy to Salesforce
+        run: |
+          sfdx force:source:deploy -p force-app/main/default/ --testlevel NoTestRun --targetusername sneharajendran23720@gmail.com --checkonly
+          sfdx force:source:deploy -p force-app/main/default/ --testlevel NoTestRun --targetusername sneharajendran23720@gmail.com
