@@ -11,7 +11,7 @@ jobs:
   steps:
    - uses: actions/checkout@v3
    - name: Validate
-     uses: Sneha23720/Github-Actions@v1.0.0
+     uses: Sneha23720/Github-Actions@main
      with:
       SFDX_AUTH_URL: ${{secrets.SFDX_AUTH_URL}}
       DRY_RUN: true
