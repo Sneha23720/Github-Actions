@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'  # Use the version required for Salesforce CLI
+          node-version: '16.x'  # Use the version required for Salesforce CLI
       
       - name: Install Salesforce CLI
         run: npm install -g sfdx-cli
