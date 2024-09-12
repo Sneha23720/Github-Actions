@@ -1,0 +1,20 @@
+name: 'My Custom Action'
+description: 'A brief description of what this action does.'
+author: 'Your Name'
+inputs:
+  input1:
+    description: 'Description of the first input'
+    required: true
+    default: 'default_value'
+  input2:
+    description: 'Description of the second input'
+    required: false
+    default: 'default_value'
+
+outputs:
+  output1:
+    description: 'Description of the output'
+  
+runs:
+  using: 'node12'
+  main: 'index.js'
