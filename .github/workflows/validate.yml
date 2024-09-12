@@ -9,9 +9,10 @@ jobs:
  validate:
   runs-on: ubuntu-latest
   steps:
-   - uses: actions/checkout@v4.1.7/Action.yml
+   - uses: actions/checkout@v4.1.7
    - name: Validate
-     uses: Sneha23720/Github-Actions@main
+     uses: ./.github/actions/action.yml
+
      with:
       SFDX_AUTH_URL: ${{secrets.SFDX_AUTH_URL}}
       DRY_RUN: true
