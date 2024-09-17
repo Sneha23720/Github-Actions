@@ -4,3 +4,4 @@ M	force-app/main/default/objects/Assignment_object__c/fields/Status__c.field-met
 A	release/US-001/runtests.txt
 M	force-app/main/default/objects/Candidate__c/fields/First_Name__c.field-meta.xml
 objects/Assignment_object__c/fields/Status__c.field-meta.xml
+objects/Candidate__c/fields/Email__c.field-meta.xml
