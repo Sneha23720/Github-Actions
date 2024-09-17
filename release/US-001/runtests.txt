@@ -1,0 +1,2 @@
+#Atleast one test class needed in runtests.txt file to run the build
+Sampletest.cls

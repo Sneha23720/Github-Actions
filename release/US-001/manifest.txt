@@ -1,2 +1,4 @@
 
 M	force-app/main/default/objects/CEO__c/fields/sara__c.field-meta.xml
+M	force-app/main/default/objects/Assignment_object__c/fields/Status__c.field-meta.xml
+A	release/US-001/runtests.txt
