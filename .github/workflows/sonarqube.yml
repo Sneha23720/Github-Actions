@@ -1,4 +1,5 @@
-name: Validate
+name: SonarQube Analysis
+
 on: 
   pull_request:
     branches:
@@ -44,14 +45,3 @@ jobs:
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN \
             -Dsonar.language=java # Change based on your project language
-  validate:
-   runs-on: ubuntu-latest
-   steps:
-    - uses: actions/checkout@v4.1.7
-    - name: Validate
-      uses: ./.github/actions
-
-      with:
-       SFDX_AUTH_URL: ${{secrets.SFDX_AUTH_URL}}
-       DRY_RUN: true
-       TEST_LEVEL: NoTestRun
