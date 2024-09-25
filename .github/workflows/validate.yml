@@ -6,15 +6,52 @@ on:
     paths: 
       - 'force-app/**'
 jobs:
- validate:
-  runs-on: ubuntu-latest
-  steps:
-   - uses: actions/checkout@v4.1.7
-   - name: Validate
-     uses: ./.github/actions
+  sonarqube:
+    name: SonarQube Analysis
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-     with:
-      SFDX_AUTH_URL: ${{secrets.SFDX_AUTH_URL}}
-      DRY_RUN: true
-      TEST_LEVEL: NoTestRun
+      - name: Set up JDK (if using Java)
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11' # Change according to your project
+
+      - name: Cache SonarQube scanner
+        uses: actions/cache@v2
+        with:
+          path: ~/.sonar/cache
+          key: sonar-cache-${{ runner.os }}-${{ hashFiles('**/*.gradle', '**/*.pom', '**/*.properties', '**/*.yml', '**/*.xml') }}
+          restore-keys: |
+            sonar-cache-${{ runner.os }}-
+
+      - name: Install SonarScanner
+        run: |
+          curl -sSfL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-4.8.0.2856-linux.zip -o sonar-scanner.zip
+          unzip sonar-scanner.zip -d $HOME
+          echo "$HOME/sonar-scanner-4.8.0.2856-linux/bin" >> $GITHUB_PATH
+
+      - name: SonarQube Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=GitAction \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=$SONAR_HOST_URL \
+            -Dsonar.login=$SONAR_TOKEN \
+            -Dsonar.language=java # Change based on your project language
+  validate:
+   runs-on: ubuntu-latest
+   steps:
+    - uses: actions/checkout@v4.1.7
+    - name: Validate
+      uses: ./.github/actions
+
+      with:
+       SFDX_AUTH_URL: ${{secrets.SFDX_AUTH_URL}}
+       DRY_RUN: true
+       TEST_LEVEL: NoTestRun
