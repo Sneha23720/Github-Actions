@@ -5,7 +5,7 @@ on:
       - develop
     paths: 
       - 'force-app/**'
-jobs:
+jobs: 
   sonarqube:
     name: SonarQube Analysis
     runs-on: ubuntu-latest
